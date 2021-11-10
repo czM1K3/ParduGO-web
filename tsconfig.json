@@ -3,7 +3,7 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["components/*"],
-      "@iamges/*": ["public/assets/images/*"],
+      "@images/*": ["public/assets/images/*"],
       "@public/*": ["public/*"]
     },
     "target": "es5",
