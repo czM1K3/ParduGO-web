@@ -30,14 +30,20 @@ const LoginForm: React.FC = () => {
         validate={(values) => {
           const errors: any = {};
           if (!values.email) {
-            errors.email = 'Povinný údaj';
+            errors.email = 'Vyplňte prosím email';
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
             errors.email = 'Email není validní';
           }
+          if (!values.password) {
+            errors.email = 'Vyplňte prosím heslo';
+          } else if (values.password.length < 8) {
+          {
+            errors.email = 'Heslo musí mít alespoň 8 znaků';
+          }
           return errors;
-        }}
+        }}}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             login(values.email, values.password);
