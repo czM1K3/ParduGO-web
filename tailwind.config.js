@@ -9,6 +9,15 @@ module.exports = {
         pardubice: {
           default: '#B70106',
         },
+        background: {
+          default: '#F6F7FA',
+        },
+        border: {
+          default: '#F2EDED',
+        },
+        component:{
+          dark: '#F2EDED',
+        }
       },
     },
   },

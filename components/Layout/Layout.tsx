@@ -1,11 +1,16 @@
 import React from 'react';
 import { Navbar } from '@components/Navbar';
+import { Sidebar } from '@components/Sidebar';
+import { Map } from '@components/Map';
 
 const Layout: React.FC<{}> = ({ children }) => {
   return (
-    <div>
+    <div className="w-screen h-screen flex flex-col">
       <Navbar />
-      {children}
+      <div className="w-full h-full flex">
+        <Map />
+        <Sidebar />
+      </div>
     </div>
   );
 };
