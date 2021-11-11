@@ -1,0 +1,6 @@
+schema: lib/type-defs.ts
+documents: lib/graphql/*.graphql
+plugins:
+ - typescript-operations
+ - typescript-react-apollo
+cacheDir: .cache

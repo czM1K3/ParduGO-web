@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"  
+  previewFeatures = ["dataProxy"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int @id @default(autoincrement())
+  email       String @unique
+  password    String
+}
+
+model Event {
+  id          Int @id @default(autoincrement())
+  name        String
+  latitiude   Float
+  longitude   Float
+  start       DateTime
+  end         DateTime
+  category    String
+  web         String
+  contact_phone String
+  contact_email String
+  description String
+}
