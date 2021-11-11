@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
           <div className="space-x-4">
             <NavbarItem url="/" name="Mapa" />
             <NavbarItem url="/o-projektu" name="O projektu" />
-            <NavbarItem url="/administrace" name="Administrace" />
+            <NavbarItem url="/prihlaseni" name="Přihlášení" />
           </div>
         </NavbarSection>
       </nav>
