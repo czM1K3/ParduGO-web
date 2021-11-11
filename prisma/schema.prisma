@@ -22,7 +22,7 @@ model User {
 model Event {
   id          Int @id @default(autoincrement())
   name        String
-  latitiude   Float
+  latitude    Float
   longitude   Float
   start       DateTime
   end         DateTime
@@ -33,4 +33,5 @@ model Event {
   description String
   user_id     Int
   user        User @relation(fields: [user_id], references: [id])
+  approved    Boolean @default(false)
 }
