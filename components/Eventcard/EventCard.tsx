@@ -1,12 +1,12 @@
 import React from 'react';
-import Eventheader from './Eventheader';
-import Eventdate from './Eventdate';
+import Eventheader from './EventHeader';
+import Eventdate from './EventDate';
 import Link from 'next/link';
 
 
 type EventcardProps = { url: string };
 
-const Eventcard: React.FC<EventcardProps> = ({ url }) => {
+const EventCard: React.FC<EventcardProps> = ({ url }) => {
   return (
     <>
       <Link href={url} passHref>
@@ -23,4 +23,4 @@ const Eventcard: React.FC<EventcardProps> = ({ url }) => {
   );
 };
 
-export default Eventcard;
+export default EventCard;

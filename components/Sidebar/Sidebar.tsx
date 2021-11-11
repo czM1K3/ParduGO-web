@@ -1,5 +1,5 @@
 import React from 'react';
-import { Eventcard } from '../Eventcard/';
+import { EventCard } from '../Eventcard/';
 import { Category } from '../Category';
 
 const Sidebar = () => {
@@ -14,10 +14,10 @@ const Sidebar = () => {
         <Category category_name="Kultura"/>
       </div>
       <div className="max-h-0">
-      <Eventcard url="/akce/1"/>
-      <Eventcard url="/akce/1"/>
-      <Eventcard url="/akce/1"/>
-      <Eventcard url="/akce/1"/>
+      <EventCard url="/akce/1"/>
+      <EventCard url="/akce/1"/>
+      <EventCard url="/akce/1"/>
+      <EventCard url="/akce/1"/>
       </div>
     </div>
   );

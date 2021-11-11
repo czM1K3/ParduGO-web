@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         pardubice: {
           default: '#B70106',
+          dark: '#A90003'
         },
         background: {
           default: '#F6F7FA',
