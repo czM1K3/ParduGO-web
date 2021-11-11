@@ -1,8 +1,13 @@
 import React from 'react';
 import { EventCard } from '../Eventcard/';
 import { Category } from '../Category';
+import { GetAllEventsQuery } from '../../lib/graphql/index.graphql';
 
-const Sidebar = () => {
+type SidebarProps = {
+  data: GetAllEventsQuery;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ data }) => {
   return (
     <div className="w-full h-full bg-white shadow flex flex-col p-8 overflow-scroll	overflow-x-hidden">
       <div className="mb-8">
@@ -14,10 +19,7 @@ const Sidebar = () => {
         <Category category_name="Kultura"/>
       </div>
       <div className="max-h-0">
-      <EventCard url="/akce/1"/>
-      <EventCard url="/akce/1"/>
-      <EventCard url="/akce/1"/>
-      <EventCard url="/akce/1"/>
+        {data.getAllEvents.map((event) => <EventCard key={event.id} url={`/akce/${event.id}`} name={event.name} start={event.start} end={event.end} />)}
       </div>
     </div>
   );

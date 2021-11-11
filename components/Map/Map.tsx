@@ -1,3 +1,4 @@
+import { GetAllEventsQuery } from 'lib/graphql/index.graphql';
 import { useState } from 'react';
 import ReactMapGL, { NavigationControl, GeolocateControl } from 'react-map-gl';
 import Marker from './Marker';
@@ -10,7 +11,11 @@ type Viewport = {
   pitch: number;
 };
 
-const Map = () => {
+type MapProps = {
+  data: GetAllEventsQuery;
+}
+
+const Map: React.FC<MapProps> = ({ data }) => {
   const [viewport, setViewport] = useState<Viewport>({
     latitude: 50,
     longitude: 15,
@@ -36,7 +41,13 @@ const Map = () => {
         }}
         positionOptions={{ enableHighAccuracy: true }}
       />
-      <Marker latitude={50} longitude={15} />
+      {data.getAllEvents.map((event) => (
+        <Marker 
+          key={event.id}
+          latitude={event.latitude}
+          longitude={event.longitude}
+        />
+      ))}
       <NavigationControl
         style={{
           bottom: 240,
