@@ -1,6 +1,8 @@
-const resolvers = {
+import { Resolvers } from "../.cache/__types__";
+
+const resolvers: Resolvers = {
 	Query: {
-		hello: () => 'Hello world!',
+		hello: (test, args) => "Hello!!!",
 	},
 };
 

@@ -2,8 +2,9 @@
   "name": "my-app",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "codegen": "yarn graphql-let",
+    "dev": "yarn codegen && next dev",
+    "build": "yarn codegen && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -21,6 +22,11 @@
     "react-map-gl": "^6.1.17"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.2.2",
+    "@graphql-codegen/import-types-preset": "^2.1.7",
+    "@graphql-codegen/typescript": "^2.3.1",
+    "@graphql-codegen/typescript-operations": "^2.2.0",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.1",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/micro-cors": "^0.1.2",
     "@types/node": "16.11.6",
@@ -28,6 +34,7 @@
     "autoprefixer": "^10.4.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.2",
+    "graphql-let": "^0.18.6",
     "postcss": "^8.3.11",
     "prettier": "^2.4.1",
     "tailwindcss": "^2.2.19",
