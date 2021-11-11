@@ -7,7 +7,7 @@
     "build": "yarn codegen && next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-client": "prisma generate"
+    "generate-client": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate"
   },
   "dependencies": {
     "@apollo/client": "^3.4.17",
