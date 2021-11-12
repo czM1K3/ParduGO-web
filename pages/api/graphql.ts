@@ -13,6 +13,7 @@ const apolloServer = new ApolloServer({
 	parseOptions: {
 		noLocation: true,
 	},
+	playground: true,
 });
 
 export const config = {
