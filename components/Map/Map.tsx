@@ -17,9 +17,9 @@ type MapProps = {
 
 const Map: React.FC<MapProps> = ({ data }) => {
   const [viewport, setViewport] = useState<Viewport>({
-    latitude: 50,
-    longitude: 15,
-    zoom: 3.5,
+    latitude: 50.034309,
+    longitude: 15.781199,
+    zoom: 12.5,
     bearing: 0,
     pitch: 0,
   });
@@ -31,7 +31,7 @@ const Map: React.FC<MapProps> = ({ data }) => {
       height="100%"
       onViewportChange={setViewport}
       mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
+      mapStyle="mapbox://styles/kahy9/ckvw9wfkq4q8914qnrr8ttdg0"
     >
       <GeolocateControl
         style={{

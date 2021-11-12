@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body, html{
+    background-color: #F6F7FA;
+    height: 100%;
+    width: 100%;
+}
+
+#__next{
+    height: 100%;
+    width: 100%;
+}

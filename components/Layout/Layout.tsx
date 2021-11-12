@@ -5,8 +5,10 @@ import { Map } from '@components/Map';
 
 const Layout: React.FC<{}> = ({ children }) => {
   return (
-    <div className="w-screen h-screen flex flex-col bg-background-default">
+    <div className="flex w-full h-full flex-col bg-background-default">
+      <div>
       <Navbar />
+      </div>
       {children}
     </div>
   );

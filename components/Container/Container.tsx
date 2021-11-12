@@ -7,7 +7,7 @@ type ContainerProps = {
 
 const Container: React.FC<ContainerProps> = ({ heading, children }) => {
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full flex justify-center py-16">
       <div className="w-8/12">
         <div className="text-center">
           <div className="mb-8">

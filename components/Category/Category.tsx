@@ -5,7 +5,7 @@ type CategoryProps = { category_name: string };
 const Category: React.FC<CategoryProps> = ({ category_name }) => {
   return (
     <>
-      <div className="py-4 px-8 bg-component-dark shadow rounded flex content-center my-1.5 w-max m-1">
+      <div className="p-8 bg-component-dark shadow rounded flex content-center my-1.5 w-max m-1">
         <span className="text-pardubice-default font-bold text-sm">{category_name}</span>
       </div>
     </>
