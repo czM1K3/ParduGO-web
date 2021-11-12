@@ -1,5 +1,5 @@
 import React from 'react';
-import { EventCard } from '../Eventcard/';
+import { EventCard } from '../EventCard';
 import { Category } from '../Category';
 import { GetAllEventsQuery } from '../../lib/graphql/index.graphql';
 
