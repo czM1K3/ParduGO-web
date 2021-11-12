@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
       <nav className="bg-white h-14 w-full shadow sticky top-0 z-50 flex justify-center align-center font-sans font-bold flex items-center text-center">
         <NavbarSection>
           <Link href="/" passHref>
-            <Image src={Logo} width={200} height={40} />
+            <Image src={Logo} width={200} height={40} alt="ParduGO Logo" />
           </Link>
         </NavbarSection>
 
