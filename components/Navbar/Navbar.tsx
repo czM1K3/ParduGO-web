@@ -2,6 +2,8 @@ import React from 'react';
 import NavbarItem from './NavbarItem';
 import NavbarSection from './NavbarSection';
 import Link from 'next/link';
+import Logo from "./pardugo.svg";
+import Image from "next/image";
 
 const Navbar: React.FC = () => {
   return (
@@ -9,9 +11,7 @@ const Navbar: React.FC = () => {
       <nav className="bg-white h-14 w-full shadow sticky top-0 z-50 flex justify-center align-center font-sans font-bold flex items-center text-center">
         <NavbarSection>
           <Link href="/" passHref>
-            <div className="bg-pardubice-default text-white">
-              <h1>Logo</h1>
-            </div>
+            <Image src={Logo} width={200} height={40} />
           </Link>
         </NavbarSection>
 
