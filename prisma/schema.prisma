@@ -34,4 +34,5 @@ model Event {
   user_id     Int
   user        User @relation(fields: [user_id], references: [id])
   approved    Boolean @default(false)
+  price       Int?
 }
