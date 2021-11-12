@@ -1,14 +1,19 @@
 import { Layout } from '@components/Layout';
-import { Sidebar } from '@components/Sidebar';
 import type { NextPage } from 'next';
-import { Map } from '@components/Map';
 import { Login } from '@components/Login';
+import Head from 'next/head';
 
 const Prihlaseni: NextPage = () => {
   return (
-    <Layout>
-        <Login/>
-    </Layout>
+    <>
+      <Head>
+        <title>Přihlášení</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Layout>
+        <Login />
+      </Layout>
+    </>
   );
 };
 
