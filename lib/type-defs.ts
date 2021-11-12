@@ -5,6 +5,7 @@ export default gql`
 		hello: String!
 		getAllEvents: [Event!]!
 		getUserEvents: [Event!]!
+		getEvent(id: ID!): Event
 	}
 
 	type Mutation {

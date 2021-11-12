@@ -18,11 +18,11 @@ const resolvers: Resolvers<MyContext> = {
 			console.log(users);
 			return "Hello!!!";
 		},
-		getAllEvents: async (_parent, _args, { prisma, userId }) => {
+		getAllEvents: async (_parent, _args, { prisma }) => {
 			const events = await prisma.event.findMany({
 				where: {
 					end: {
-						gt: new Date((new Date).toLocaleString('cs-CZ', {timeZone: 'Europe/Prague' })),
+						gt: new Date(),
 					},
 					approved: true,
 				},
@@ -34,12 +34,12 @@ const resolvers: Resolvers<MyContext> = {
 				end: `${event.end.getTime()}`,
 			}));
 		},
-		getUserEvents: async (_parent, {  }, { prisma, userId }) => {
+		getUserEvents: async (_parent, _args, { prisma, userId }) => {
 			if (!userId) throw new Error("User not logged in");
 			const events = await prisma.event.findMany({
 				where: {
 					end: {
-						gt: new Date((new Date).toLocaleString('cs-CZ', {timeZone: 'Europe/Prague' })),
+						gt: new Date(),
 					},
 					user_id: userId,
 				},
@@ -50,6 +50,20 @@ const resolvers: Resolvers<MyContext> = {
 				start: `${event.start.getTime()}`,
 				end: `${event.end.getTime()}`,
 			}));
+		},
+		getEvent: async (_parent, { id }, { prisma }) => {
+			const event = await prisma.event.findFirst({
+				where: {
+					id: parseInt(id),
+				},
+			});
+			if (!event) return null;
+			return {
+				...event,
+				id: `${event.id}`,
+				start: `${event.start.getTime()}`,
+				end: `${event.end.getTime()}`,
+			};
 		},
 	},
 	Mutation: {
