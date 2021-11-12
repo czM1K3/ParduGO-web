@@ -119,14 +119,17 @@ const CreateEvent: React.FC = () => {
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
                 Kategorie
               </label>
-              <input
-                type="text"
-                name="contactPhone"
+              <select
+                name="category"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.web}
+                value={values.category}
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
-              />
+              >
+                <option value="1">Sport</option>
+                <option value="2">Hudba</option>
+                <option value="3">Kultura</option>
+              </select>
               {errors.web && touched.web && errors.web}
 
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
