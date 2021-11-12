@@ -26,6 +26,7 @@ export default gql`
 		contactPhone: String!
 		contactEmail: String!
 		description: String!
+		price: Int
 	}
 
 	type Event {
@@ -41,5 +42,6 @@ export default gql`
 		contact_email: String!
 		description: String!
 		approved: Boolean!
+		price: Int
 	}
 `;

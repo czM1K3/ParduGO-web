@@ -113,6 +113,7 @@ const resolvers: Resolvers<MyContext> = {
 					contact_email: input.contactEmail,
 					description: input.description,
 					user_id: userId,
+					price: input.price,
 				},
 			});
 			console.log(event);
