@@ -9,9 +9,9 @@ const Odhlasit: React.FC = () => {
     useEffect(() => {
         if (cookie.authorization) {
             removeCookie("authorization");
-            router.push("/prihlaseni");
+            router.reload();
         }
-    }, [router]);
+    }, [router, cookie.authorization, removeCookie]);
     return (
         <Layout>
             <h1>Odhlašování</h1>

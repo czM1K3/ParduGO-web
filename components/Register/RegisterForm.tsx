@@ -22,7 +22,7 @@ const RegisterForm = () => {
         }
       });
       setCookie("authorization", result.data!.register);
-      router.push("/administrace");
+      router.reload();
     } catch (e: any) {
       toast.error(e.message);
     }
