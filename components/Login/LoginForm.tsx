@@ -4,10 +4,30 @@ import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Formik } from 'formik';
+import { useCookies } from 'react-cookie';
+import { useRouter } from 'next/router';
+import { useLoginMutation } from 'lib/graphql/login-register.graphql';
 
-const login = (email: string, password: string) =>
-  toast.info(`Email: ${email} Password: ${password}`);
 const LoginForm: React.FC = () => {
+  const [mutation] = useLoginMutation();
+  const router = useRouter();
+  const [_cookie, setCookie] = useCookies(["authorization"]);
+
+  const submit = async (email: string, password: string) => {
+    try {
+      const response = await mutation({
+        variables: {
+          email,
+          password,
+        },
+      });
+      setCookie("authorization", response.data!.login)
+      router.reload();
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  }
+
   return (
     <div>
       <ToastContainer
@@ -44,10 +64,8 @@ const LoginForm: React.FC = () => {
           }
           return errors;
         }}}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            login(values.email, values.password);
-          });
+        onSubmit={async ({email, password}) => {
+          submit(email, password);
         }}
       >
         {({
@@ -100,7 +118,7 @@ const LoginForm: React.FC = () => {
               <div className="py-5 flex justify-center items-center text-center">
                 <div>
                   <div className="text-center sm:text-left whitespace-nowrap">
-                    <Link href="/registrace" passHref>
+                    <Link href="/prihlaseni/registrace" passHref>
                       <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
                         <HiPlusCircle className="text-base float-left   " />
                         <span className="inline-block ml-1">

@@ -4,11 +4,30 @@ import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Formik } from 'formik';
-
-const register = (email: string, password: string) =>
-  toast.info(`Email: ${email} Password: ${password}`);
+import { useRouter } from 'next/router';
+import { useRegisterMutation } from 'lib/graphql/login-register.graphql';
+import { useCookies } from 'react-cookie';
 
 const RegisterForm = () => {
+  const router = useRouter();
+  const [mutation] = useRegisterMutation();
+  const [_cookie, setCookie] = useCookies(["authorization"]);
+
+  const submit = async (email: string, password: string) => {
+    try {
+      const result = await mutation({
+        variables: {
+          email,
+          password,
+        }
+      });
+      setCookie("authorization", result.data!.register);
+      router.reload();
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  }
+
   return (
     <div>
       <ToastContainer
@@ -44,10 +63,8 @@ const RegisterForm = () => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            register(values.email, values.password);
-          });
+        onSubmit={({email, password}) => {
+          submit(email, password);
         }}
       >
         {({
