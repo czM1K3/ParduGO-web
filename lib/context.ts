@@ -1,4 +1,4 @@
-import { NextPageContext } from "next";
+import { NextApiRequest } from "next";
 import { MyContext } from "./types/context";
 import { MyToken } from "./types/token";
 import jwt from "jsonwebtoken";
@@ -13,11 +13,12 @@ if (!JWT_SECRET) {
 const prisma = new PrismaClient();
 
 export const myContext = async ({
-	req,
-}: NextPageContext): Promise<MyContext> => {
+	req
+}: {req: NextApiRequest}): Promise<MyContext> => {
 	if (!req) return { userId: null, prisma };
 
-	const authHeader = req.headers.authorization;
+	let authHeader = req.headers.authorization;
+	if (!authHeader && req) authHeader = req.cookies["authorization"]
 	if (!authHeader) return { userId: null, prisma };
 
 	const token = authHeader.split(" ")[1];

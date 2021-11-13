@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
             <NavbarItem url="/" name="Mapa" />
             <NavbarItem url="/oblibene" name="Oblíbené" />
             <NavbarItem url="/o-projektu" name="O projektu" />
-            <NavbarItem url="/prihlaseni" name="Přihlášení" />
+            <NavbarItem url="/administrace" name="Admin" />
           </div>
         </NavbarSection>
       </nav>

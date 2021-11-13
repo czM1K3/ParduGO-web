@@ -1,0 +1,5 @@
+query Event ($id: ID!) {
+	getEvent(id: $id) {
+		name
+	}
+}

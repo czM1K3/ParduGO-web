@@ -22,7 +22,7 @@ const LoginForm: React.FC = () => {
         },
       });
       setCookie("authorization", response.data!.login)
-      router.reload();
+      router.push("/administrace");
     } catch (e: any) {
       toast.error(e.message);
     }

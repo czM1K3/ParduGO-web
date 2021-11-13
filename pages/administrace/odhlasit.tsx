@@ -9,7 +9,7 @@ const Odhlasit: React.FC = () => {
     useEffect(() => {
         if (cookie.authorization) {
             removeCookie("authorization");
-            router.reload();
+            router.push("/prihlaseni");
         }
     }, [router]);
     return (

@@ -1,0 +1,9 @@
+query Administration {
+  	getUserEvents{
+    	id
+    	name
+		web
+		start
+		end
+	}
+}

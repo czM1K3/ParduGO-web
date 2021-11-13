@@ -23,9 +23,6 @@ const createIsomorphLink = (context: ResolverContext = {}) => {
 		return new HttpLink({
 			uri: "/api/graphql",
 			credentials: "same-origin",
-			headers: {
-				authorization: localStorage.getItem("authorization"),
-			},
 		});
 	}
 };
