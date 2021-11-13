@@ -4,11 +4,52 @@ import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Formik } from 'formik';
+import { useCreateEventMutation } from '../../lib/graphql/administrace.graphql';
+import { useRouter } from 'next/router';
 
-const create = () => toast.success('Akce byla vytvořena!');
 const CreateEvent: React.FC = () => {
+  const [mutation] = useCreateEventMutation();
+  const router = useRouter();
+
   const rows = 4;
   const cols = 50;
+
+  const submit = async (values: {
+    name: string,
+    latitude: number,
+    longitude: number,
+    startTime: string,
+    endTime: string,
+    category: string,
+    web: string,
+    contactPhone: string,
+    contactEmail: string,
+    description: string,
+    price: number,
+  }) => {
+    try {
+      await mutation({
+        variables: {
+          input: {
+            category: values.category,
+            contactEmail: values.contactEmail,
+            contactPhone: values.contactPhone,
+            description: values.description,
+            endTime: `${new Date(values.endTime).getTime()}`,            
+            startTime: `${new Date(values.startTime).getTime()}`,
+            latitude: values.latitude,
+            longitude: values.longitude,
+            name: values.name,
+            price: values.price === 0 ? null : values.price,
+            web: values.web,
+          }
+        }
+      });
+      router.push('/administrace');
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+   }
   return (
     <div>
       <ToastContainer
@@ -27,30 +68,30 @@ const CreateEvent: React.FC = () => {
       <Formik
         initialValues={{
           name: '',
-          latitude: 0,
-          longitude: 0,
+          latitude: 50.04,
+          longitude: 15.78,
           startTime: '',
           endTime: '',
-          category: '',
+          category: 'Sport',
           web: '',
           contactPhone: '',
           contactEmail: '',
           description: '',
+          price: 0,
         }}
         validate={(values) => {
           const errors: any = {};
-          if (!values.name) {
-            errors.name = 'Vyplňte prosím název akce';
-          }
-          if (!values.description) {
-            errors.email = 'Vyplňte prosím popis akce';
-          }
+          if (!values.name) errors.name = 'Vyplňte prosím název akce';
+          if (!values.description) errors.description = 'Vyplňte prosím popis akce';
+          if (!values.startTime) errors.startTime = 'Vyplňte prosím datum začátku akce';
+          if (!values.endTime) errors.endTime = 'Vyplňte prosím datum konce akce';
+          if (!values.web) errors.web = 'Vyplňte prosím webovou stránku akce';
+          if (!values.contactPhone) errors.contactPhone = 'Vyplňte prosím telefonní číslo kontaktu';
+          if (!values.contactEmail) errors.contactEmail = 'Vyplňte prosím email kontaktu';
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            create();
-          });
+        onSubmit={(values) => {
+          submit(values);
         }}
       >
         {({
@@ -108,13 +149,39 @@ const CreateEvent: React.FC = () => {
               </label>
               <input
                 type="text"
-                name="contactPhone"
+                name="web"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.web}
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
               />
               {errors.web && touched.web && errors.web}
+
+              <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                Kontaktní telefon
+              </label>
+              <input
+                type="text"
+                name="contactPhone"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.contactPhone}
+                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
+              />
+              {errors.contactPhone && touched.contactPhone && errors.contactPhone}
+
+              <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                Kontaktní email
+              </label>
+              <input
+                type="text"
+                name="contactEmail"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.contactEmail}
+                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
+              />
+              {errors.contactEmail && touched.contactEmail && errors.contactEmail}
 
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
                 Kategorie
@@ -126,11 +193,52 @@ const CreateEvent: React.FC = () => {
                 value={values.category}
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
               >
-                <option value="1">Sport</option>
-                <option value="2">Hudba</option>
-                <option value="3">Kultura</option>
+                <option value="Sport">Sport</option>
+                <option value="Hudba">Hudba</option>
+                <option value="3Kultura">Kultura</option>
               </select>
-              {errors.web && touched.web && errors.web}
+              {errors.category && touched.category && errors.category}
+
+              <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                Vstupné
+              </label>
+              <input
+                type="number"
+                name="price"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.price}
+                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
+              />
+              {errors.price && touched.price && errors.price}
+
+              <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                Zeměpisná šířka
+              </label>
+              <input
+                type="number"
+                name="latitude"
+                step="0.001"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.latitude}
+                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
+              />
+              {errors.latitude && touched.latitude && errors.latitude}
+
+              <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                Zeměpisná výška
+              </label>
+              <input
+                type="number"
+                name="longitude"
+                step="0.001"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.longitude}
+                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
+              />
+              {errors.longitude && touched.longitude && errors.longitude}
 
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
                 Popis akce
@@ -153,7 +261,7 @@ const CreateEvent: React.FC = () => {
               >
                 <span className="inline-block mr-2 flex justify-center items-center">
                   Vytvořit akci
-                  <HiPlusCircle className="float-right ml-1"/>
+                  <HiPlusCircle className="float-right ml-1" />
                 </span>
               </button>
             </div>

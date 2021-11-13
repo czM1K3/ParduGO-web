@@ -7,3 +7,7 @@ query Administration {
 		end
 	}
 }
+
+mutation CreateEvent($input: CreateEventInput!) {
+	createEvent(input: $input)
+}

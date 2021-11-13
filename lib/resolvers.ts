@@ -11,13 +11,7 @@ if (!JWT_SECRET) {
 
 const resolvers: Resolvers<MyContext> = {
 	Query: {
-		hello: async (_parent, _args, { prisma }) => {
-			const users = await prisma.user.findMany({
-
-			});
-			console.log(users);
-			return "Hello!!!";
-		},
+		hello: async (_parent, _args, { prisma }) => "Hello!!!",
 		getAllEvents: async (_parent, _args, { prisma }) => {
 			const events = await prisma.event.findMany({
 				where: {
@@ -100,7 +94,7 @@ const resolvers: Resolvers<MyContext> = {
 			const start = parseInt(input.startTime);
 			const end = parseInt(input.endTime);
 			if (!start || !end) throw new Error("Invalid time");
-			const event = await prisma.event.create({
+			await prisma.event.create({
 				data: {
 					name: input.name,
 					latitude: input.latitude,
@@ -116,7 +110,6 @@ const resolvers: Resolvers<MyContext> = {
 					price: input.price,
 				},
 			});
-			console.log(event);
 			return true;
 		},
 		approveEvent: async (_parent, { id }, { prisma, userId }) => {
