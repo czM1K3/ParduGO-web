@@ -17,7 +17,7 @@ module.exports = {
           default: '#F2EDED',
         },
         component:{
-          dark: '#F2EDED',
+          dark: '#EFF0F0',
         }
       },
     },

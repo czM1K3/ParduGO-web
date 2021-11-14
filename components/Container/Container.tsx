@@ -2,7 +2,7 @@ import React, { Children } from 'react';
 import Link from 'next/link';
 
 type ContainerProps = {
-  heading: string;
+  heading: string | undefined;
 };
 
 const Container: React.FC<ContainerProps> = ({ heading, children }) => {

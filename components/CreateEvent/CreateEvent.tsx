@@ -72,7 +72,7 @@ const CreateEvent: React.FC = () => {
           longitude: 15.78,
           startTime: '',
           endTime: '',
-          category: 'Sport',
+          category: 'Akce',
           web: '',
           contactPhone: '',
           contactEmail: '',
@@ -193,9 +193,17 @@ const CreateEvent: React.FC = () => {
                 value={values.category}
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
               >
-                <option value="Sport">Sport</option>
+                <option value="Akce">Akce</option>
+                <option value="Pomozte nám">Pomozte nám zlepšit město</option>
+                <option value="Kultura">Kultura</option>
+                <option value="Zdraví">Zdraví</option>
                 <option value="Hudba">Hudba</option>
-                <option value="3Kultura">Kultura</option>
+                <option value="Sport">Sport</option>
+                <option value="Divadlo">Divadlo</option>
+                <option value="Film">Film</option>
+                <option value="Koncert">Koncert</option>
+                <option value="Politika">Politika</option>
+                <option value="Jiné">Jiné</option>
               </select>
               {errors.category && touched.category && errors.category}
 

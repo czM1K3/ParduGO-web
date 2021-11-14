@@ -46,6 +46,8 @@ const Map: React.FC<MapProps> = ({ data }) => {
           key={event.id}
           latitude={event.latitude}
           longitude={event.longitude}
+          category={event.category}
+          id={event.id}
         />
       ))}
       <NavigationControl
