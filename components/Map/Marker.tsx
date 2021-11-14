@@ -12,20 +12,30 @@ import Sound from '../../public/markers/marker-sound.svg';
 import Event from '../../public/markers/marker-event.svg';
 import Other from '../../public/markers/marker-other.svg';
 import { Marker as MapGLMarker } from 'react-map-gl';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEventQuery } from 'lib/graphql/event.graphql';
 
 const Marker = ({
+  id,
   latitude,
   longitude,
   category,
-  id,
-  onClick,
+  description,
+  name,
+  isSomeOpen,
+  setIsSomeOpen,
 }: {
   latitude: number;
   longitude: number;
   category: string;
   id: string;
-  onClick?: () => void;
+  description?: string;
+  name?: string;
+  isSomeOpen: boolean;
+  setIsSomeOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const [hover, setHover] = useState(false);
+
   const getMarker = (category: string) => {
     switch (category) {
       case 'Pomozte nám':
@@ -53,17 +63,23 @@ const Marker = ({
     }
   };
 
-  const getUrl = (id: string) => {
-    return `/akce/${id}`;
-  };
+  const url = `/akce/${id}`;
 
   return (
     <MapGLMarker latitude={latitude} longitude={longitude}>
-      <div
-        onClick={onClick}
-        className="-translate-y-1/2 -translate-x-1/2 cursor-pointer"
-      >
-        <Link href={getUrl(id)} passHref>
+      <div className="relative">
+        {hover && (
+          <div className="absolute w-[100px] h-[120px] -translate-x-1/2  top-[-200px] bg-white">
+            {description}
+          </div>
+        )}
+        <div
+          className="-translate-y-1/2 -translate-x-1/2 cursor-pointer"
+          onClick={() => {
+            setHover(!hover);
+          }}
+          title={name}
+        >
           <a>
             <Image
               src={getMarker(category)}
@@ -72,7 +88,7 @@ const Marker = ({
               alt="Marker on map"
             />
           </a>
-        </Link>
+        </div>
       </div>
     </MapGLMarker>
   );

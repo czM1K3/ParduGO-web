@@ -13,7 +13,7 @@ type Viewport = {
 
 type MapProps = {
   data: GetAllEventsQuery;
-}
+};
 
 const Map: React.FC<MapProps> = ({ data }) => {
   const [viewport, setViewport] = useState<Viewport>({
@@ -23,6 +23,8 @@ const Map: React.FC<MapProps> = ({ data }) => {
     bearing: 0,
     pitch: 0,
   });
+
+  const [isSomeOpen, setIsSomeOpen] = useState(false);
 
   return (
     <ReactMapGL
@@ -42,12 +44,11 @@ const Map: React.FC<MapProps> = ({ data }) => {
         positionOptions={{ enableHighAccuracy: true }}
       />
       {data.getAllEvents.map((event) => (
-        <Marker 
+        <Marker
+          {...event}
+          setIsSomeOpen={setIsSomeOpen}
+          isSomeOpen={isSomeOpen}
           key={event.id}
-          latitude={event.latitude}
-          longitude={event.longitude}
-          category={event.category}
-          id={event.id}
         />
       ))}
       <NavigationControl
