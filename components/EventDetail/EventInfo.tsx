@@ -9,15 +9,18 @@ import {
 } from 'react-icons/hi';
 import Image from 'next/image';
 import EventLogo from '@public/pardugo-icon.svg';
+import { dayToString } from 'utils/date';
 
 type EventInfoProps = {
-  web: string | undefined;
-  price: number | undefined | null;
-  contact_phone: string | undefined;
-  contact_email: string | undefined;
-  category: string | undefined;
-  description: string | undefined;
-  name: string | undefined;
+  web: string;
+  price: number | null;
+  contact_phone: string;
+  contact_email: string;
+  category: string;
+  description: string;
+  name: string;
+  start: string ;
+  end: string;
 };
 
 const EventInfo: React.FC<EventInfoProps> = ({
@@ -28,7 +31,11 @@ const EventInfo: React.FC<EventInfoProps> = ({
   category,
   description,
   name,
+  start,
+  end,
 }) => {
+  const newStart = new Date(parseInt(start));
+  const newEnd = new Date(parseInt(end));
   return (
     <div className="flex flex-col">
       <div className="flex items-center">
@@ -37,8 +44,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
           <h1 className="text-gray-800 font-bold text-3xl text-pardubice-default">
             {name}
           </h1>
-
-          <span>Po - Pá</span>
+          <span className="font-bold text-pardubice-default">{ `${dayToString(newStart.getDay())} ${newStart.toLocaleDateString("cs-cz")} - ${dayToString(newEnd.getDay())} ${newEnd.toLocaleDateString("cs-cz")}`}</span>
         </div>
       </div>
       <div className="py-4 px-8 bg-component-dark shadow rounded flex content-center my-1.5 w-1/1 items-center content-center">
@@ -49,7 +55,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
           </div>
           <div className="w-full flex items-center">
             <HiOutlineTicket className="float-left mr-2 text-pardubice-default" />
-            <span>{price}</span>
+            <span>{price ? price + ",-" : "Bez vstupenek"}</span>
           </div>
           <div className="w-full flex items-center">
             <HiOutlineGlobe className="float-left mr-2 text-pardubice-default" />

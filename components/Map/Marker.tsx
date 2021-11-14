@@ -58,6 +58,8 @@ const Marker = ({
         return Sound;
       case 'Akce':
         return Event;
+      case 'Reklama':
+        return Ad;
       default:
         return Other;
     }
@@ -69,8 +71,8 @@ const Marker = ({
     <MapGLMarker latitude={latitude} longitude={longitude}>
       <div className="relative">
         {hover && (
-          <div className="absolute w-[100px] h-[120px] -translate-x-1/2  top-[-200px] bg-white">
-            {description}
+          <div className="absolute w-[150px] -translate-x-1/2 top-[-6rem] bg-white text-center rounded">
+            {name}
           </div>
         )}
         <div
