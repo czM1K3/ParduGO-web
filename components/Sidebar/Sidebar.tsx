@@ -4,7 +4,7 @@ import { Category } from '../Category';
 import { GetAllEventsQuery } from '../../lib/graphql/index.graphql';
 
 type SidebarProps = {
-  data: GetAllEventsQuery;
+  data: GetAllEventsQuery["getAllEvents"];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ data }) => {
@@ -19,7 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data }) => {
         <Category category_name="Kultura"/>
       </div>
       <div className="max-h-0">
-        {data.getAllEvents.map((event) => <EventCard key={event.id} url={`/akce/${event.id}`} name={event.name} start={event.start} end={event.end} />)}
+        {data.map((event) => <EventCard key={event.id} url={`/akce/${event.id}`} name={event.name} start={event.start} end={event.end} />)}
       </div>
     </div>
   );
