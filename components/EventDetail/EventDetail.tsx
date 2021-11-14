@@ -17,8 +17,16 @@ const EventDetail: React.FC<EventDetailProps> = ({ id }) => {
   if (loading) return <Loading />;
   if (error) return <h1>Chyba</h1>;
   return (
-    <Container heading={data?.getEvent?.name}>
-	  <EventInfo web={data?.getEvent?.web} contact_email={data?.getEvent?.contact_email} contact_phone={data?.getEvent?.contact_phone} description={data?.getEvent?.description} price={data?.getEvent?.price} category={data?.getEvent?.category}/>
+    <Container heading="Informace o akci:">
+      <EventInfo
+        web={data?.getEvent?.web}
+        contact_email={data?.getEvent?.contact_email}
+        contact_phone={data?.getEvent?.contact_phone}
+        description={data?.getEvent?.description}
+        price={data?.getEvent?.price}
+        category={data?.getEvent?.category}
+        name={data?.getEvent?.name}
+      />
     </Container>
   );
 };

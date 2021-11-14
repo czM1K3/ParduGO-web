@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data }) => {
   return (
     <div className="w-full h-full bg-white shadow flex flex-col p-8 overflow-scroll	overflow-x-hidden">
       <div className="mb-8">
-        <h1 className="ext-gray-800 font-bold text-3xl">Veškeré akce v <span className="text-pardubice-default">Pardubicích</span></h1>
+        <h1 className="text-gray-800 font-bold text-3xl">Veškeré akce v <span className="text-pardubice-default">Pardubicích</span></h1>
       </div>
       <div className="flex flex-wrap mb-8">
         <Category category_name="Reklama" icon={Ad}/>
