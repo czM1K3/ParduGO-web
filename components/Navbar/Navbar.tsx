@@ -4,8 +4,11 @@ import NavbarSection from './NavbarSection';
 import Link from 'next/link';
 import Logo from "./pardugo.svg";
 import Image from "next/image";
+import { useCookies } from 'react-cookie';
 
 const Navbar: React.FC = () => {
+  const [cookie] = useCookies();
+  const isAuthenticated = !!cookie["authorization"];
   return (
     <>
       <nav className="bg-white h-14 w-full shadow sticky top-0 z-50 flex justify-center align-center font-sans font-bold flex items-center text-center">
@@ -24,7 +27,7 @@ const Navbar: React.FC = () => {
             <NavbarItem url="/" name="Mapa" />
             <NavbarItem url="/oblibene" name="Oblíbené" />
             <NavbarItem url="/o-projektu" name="O projektu" />
-            <NavbarItem url="/administrace" name="Admin" />
+            <NavbarItem url={isAuthenticated?"/administrace":"/prihlaseni"} name={isAuthenticated?"Admin":"Přihlášení"} />
           </div>
         </NavbarSection>
       </nav>
