@@ -7,5 +7,6 @@ query getAllEvents{
     start
     end
     category
+    description
   }
 }
