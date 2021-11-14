@@ -5,10 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import EventImage from '@public/pardugo-icon.svg';
 import { HiOutlineStar, HiStar } from "react-icons/hi";
+import { useFavorite } from 'utils/favoriteContext';
 
-type EventcardProps = { url: string; start: string; end: string; name: string };
+type EventcardProps = { id: string, url: string; start: string; end: string; name: string };
 
-const EventCard: React.FC<EventcardProps> = ({ url, name, start, end }) => {
+const EventCard: React.FC<EventcardProps> = ({ id, url, name, start, end }) => {
+  const [favorites, setFavorites] = useFavorite();
   return (
     <>
       <Link href={url} passHref>
@@ -32,7 +34,19 @@ const EventCard: React.FC<EventcardProps> = ({ url, name, start, end }) => {
                 end={new Date(parseInt(end)).toLocaleDateString('cs-cz')}
               />
             </div>
-            <div className="flex items-center justify-center text-3xl text-pardubice-default"><span><HiOutlineStar/></span></div>
+            <div className="flex items-center justify-center text-3xl text-pardubice-default"
+              onClick={(e) => {
+                e.preventDefault();
+                if (favorites.includes(id)) {
+                  setFavorites(favorites.filter(item => item !== id));
+                } else {
+                  setFavorites([...favorites, id]);
+                }
+              }}>
+              <span>
+                {favorites.includes(id) ? <HiStar /> : <HiOutlineStar />}
+              </span>
+            </div>
           </div>
         </a>
       </Link>

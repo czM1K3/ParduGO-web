@@ -1,0 +1,12 @@
+query Favorites ($id: [ID!]!) {
+	getFavorites(id: $id) {
+	  id
+		name
+		latitude
+		longitude
+		start
+		end
+		category
+		description
+	}
+}

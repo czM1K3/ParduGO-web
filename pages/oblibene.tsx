@@ -1,20 +1,19 @@
-import { Container } from '@components/Container';
-import { EventCard } from '@components/EventCard';
+import { Favorites } from '@components/Favorites';
 import { Layout } from '@components/Layout';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useFavorite } from 'utils/favoriteContext';
 
 const Oblibene: NextPage = () => {
+  const [favorites] = useFavorite();
   return (
     <>
-    <Head>
+      <Head>
         <title>Oblíbené</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Layout>
-        <Container heading="Oblíbené">
-          <EventCard url='/akce/5' name="Karel" start="1" end="1"/>
-        </Container>
+        <Favorites id={favorites} />
       </Layout>
     </>
   );

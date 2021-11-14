@@ -59,6 +59,22 @@ const resolvers: Resolvers<MyContext> = {
 				end: `${event.end.getTime()}`,
 			};
 		},
+		getFavorites: async (_parent, { id }, { prisma}) => {
+			const numIds = id.map((x) => parseInt(x));
+			const events = await prisma.event.findMany({
+				where: {
+					id: {
+						in: numIds,
+					}
+				},
+			});
+			return events.map(event => ({
+				...event,
+				id: `${event.id}`,
+				start: `${event.start.getTime()}`,
+				end: `${event.end.getTime()}`,
+			}));
+		},
 	},
 	Mutation: {
 		login: async (_parent, { email, password }, { prisma }) => {

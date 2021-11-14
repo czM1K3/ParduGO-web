@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data }) => {
         <Category category_name="Jiné" icon={Others}/>
       </div>
       <div className="max-h-0">
-        {data.getAllEvents.map((event) => <EventCard key={event.id} url={`/akce/${event.id}`} name={event.name} start={event.start} end={event.end} />)}
+        {data.getAllEvents.map((event) => <EventCard key={event.id} id={event.id} url={`/akce/${event.id}`} name={event.name} start={event.start} end={event.end} />)}
       </div>
     </div>
   );

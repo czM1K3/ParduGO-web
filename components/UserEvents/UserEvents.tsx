@@ -11,7 +11,7 @@ const UserEvents: React.FC = () => {
 	return (
 		<div>
 			{data!.getUserEvents.map((event) => (
-				<EventCard key={event.id} name={event.name} start={event.start} end={event.end} url={`/akce/${event.id}`}/>
+				<EventCard key={event.id} id={event.id} name={event.name} start={event.start} end={event.end} url={`/akce/${event.id}`}/>
 			))}
 		</div>
 	);

@@ -6,6 +6,7 @@ export default gql`
 		getAllEvents: [Event!]!
 		getUserEvents: [Event!]!
 		getEvent(id: ID!): Event
+		getFavorites(id: [ID!]!): [Event!]!
 	}
 
 	type Mutation {
