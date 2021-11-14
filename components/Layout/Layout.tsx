@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Navbar } from '@components/Navbar';
-import { Sidebar } from '@components/Sidebar';
-import { Map } from '@components/Map';
 
-const Layout: React.FC<{}> = ({ children }) => {
+const Layout = ({ children, searchTerm, setSearchTerm }: { children?: React.ReactNode, searchTerm?: string, setSearchTerm?: Dispatch<SetStateAction<string>> }) => {
   return (
     <div className="flex w-full h-full flex-col bg-background-default">
       <div>
-      <Navbar />
+        <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>
       {children}
     </div>
