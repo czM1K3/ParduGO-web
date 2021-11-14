@@ -18,6 +18,7 @@ const Akce: React.FC = () => {
 
 	if (id) return (
 		<Layout>
+			<h1>Akce</h1>
 			<EventDetail id={id} />
 		</Layout>
 	);
