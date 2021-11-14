@@ -13,7 +13,7 @@ const EventCard: React.FC<EventcardProps> = ({ url, name, start, end }) => {
     <>
       <Link href={url} passHref>
         <a>
-          <div className="py-4 px-8 bg-component-dark shadow hover:shadow-md border rounded flex content-center my-3">
+          <div className="py-4 px-8 bg-component-dark shadow hover:shadow-md border rounded flex content-center my-3 hover:border-pardubice-default">
             <div className="flex content-center pr-4">
               <Image
                 src={EventImage}
