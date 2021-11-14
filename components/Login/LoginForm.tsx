@@ -7,11 +7,13 @@ import { Formik } from 'formik';
 import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
 import { useLoginMutation } from 'lib/graphql/login-register.graphql';
+import Image from 'next/image';
+import Logo from '@components/Navbar/pardugo.svg';
 
 const LoginForm: React.FC = () => {
   const [mutation] = useLoginMutation();
   const router = useRouter();
-  const [_cookie, setCookie] = useCookies(["authorization"]);
+  const [_cookie, setCookie] = useCookies(['authorization']);
 
   const submit = async (email: string, password: string) => {
     try {
@@ -21,12 +23,12 @@ const LoginForm: React.FC = () => {
           password,
         },
       });
-      setCookie("authorization", response.data!.login)
+      setCookie('authorization', response.data!.login);
       router.reload();
     } catch (e: any) {
       toast.error(e.message);
     }
-  }
+  };
 
   return (
     <div>
@@ -43,7 +45,11 @@ const LoginForm: React.FC = () => {
       />
       <ToastContainer />
 
-      <h1 className="font-bold text-center text-2xl mb-5">Logo</h1>
+      <Link href="/" passHref>
+        <div className="flex items-center justify-center mb-4 cursor-pointer">
+          <Image src={Logo} width={150} height={50} alt="ParduGo logo" />
+        </div>
+      </Link>
 
       <Formik
         initialValues={{ email: '', password: '' }}
@@ -59,12 +65,13 @@ const LoginForm: React.FC = () => {
           if (!values.password) {
             errors.email = 'Vyplňte prosím heslo';
           } else if (values.password.length < 8) {
-          {
-            errors.email = 'Heslo musí mít alespoň 8 znaků';
+            {
+              errors.email = 'Heslo musí mít alespoň 8 znaků';
+            }
+            return errors;
           }
-          return errors;
-        }}}
-        onSubmit={async ({email, password}) => {
+        }}
+        onSubmit={async ({ email, password }) => {
           submit(email, password);
         }}
       >
@@ -91,7 +98,6 @@ const LoginForm: React.FC = () => {
                   value={values.email}
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
                 />
-                {errors.email && touched.email && errors.email}
                 <label className="font-semibold text-sm text-gray-600 pb-1 block">
                   Heslo
                 </label>
@@ -103,7 +109,6 @@ const LoginForm: React.FC = () => {
                   value={values.password}
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
                 />
-                {errors.password && touched.password && errors.password}
                 <button
                   type="submit"
                   disabled={isSubmitting}

@@ -7,11 +7,13 @@ import { Formik } from 'formik';
 import { useRouter } from 'next/router';
 import { useRegisterMutation } from 'lib/graphql/login-register.graphql';
 import { useCookies } from 'react-cookie';
+import Image from 'next/image';
+import Logo from '@components/Navbar/pardugo.svg';
 
 const RegisterForm = () => {
   const router = useRouter();
   const [mutation] = useRegisterMutation();
-  const [_cookie, setCookie] = useCookies(["authorization"]);
+  const [_cookie, setCookie] = useCookies(['authorization']);
 
   const submit = async (email: string, password: string) => {
     try {
@@ -19,14 +21,14 @@ const RegisterForm = () => {
         variables: {
           email,
           password,
-        }
+        },
       });
-      setCookie("authorization", result.data!.register);
+      setCookie('authorization', result.data!.register);
       router.reload();
     } catch (e: any) {
       toast.error(e.message);
     }
-  }
+  };
 
   return (
     <div>
@@ -43,7 +45,11 @@ const RegisterForm = () => {
       />
       <ToastContainer />
 
-      <h1 className="font-bold text-center text-2xl mb-5">Logo</h1>
+      <Link href="/" passHref>
+      <div className="flex items-center justify-center mb-4 cursor-pointer">
+        <Image src={Logo} width={150} height={50} alt="ParduGo logo" />
+      </div>
+      </Link>
 
       <Formik
         initialValues={{ email: '', password: '' }}
@@ -63,7 +69,7 @@ const RegisterForm = () => {
           }
           return errors;
         }}
-        onSubmit={({email, password}) => {
+        onSubmit={({ email, password }) => {
           submit(email, password);
         }}
       >
