@@ -1,16 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
 
-type CategoryProps = { category_name: string; icon: string };
+type CategoryProps = { category_name: string };
 
-const Category: React.FC<CategoryProps> = ({ category_name, icon }) => {
+const Category: React.FC<CategoryProps> = ({ category_name }) => {
   return (
     <>
-      <div className="p-8 bg-component-dark shadow rounded grid column my-1.5 w-max m-1 hover:cursor-pointer border hover:shadow-md text-center hover:text-pardubice-default">
-        <Image src={icon} alt="Picture of categories" width={40} height={40} className="hover:text-blue-500" />
-        <span className="font-bold text-sm mt-2">
-          {category_name}
-        </span>
+      <div className="p-8 bg-component-dark shadow rounded flex content-center my-1.5 w-max m-1 hover:cursor-pointer border hover:shadow-md">
+        <span className="text-pardubice-default font-bold text-sm">{category_name}</span>
       </div>
     </>
   );
