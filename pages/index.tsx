@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         {loading && <Loading />}
         {error && <p>Error: {error.message}</p>}
         {data && (
-          <div className="w-full h-full flex">
+          <div className="w-full h-full flex" id="cont">
             <Map data={data} />
             <Sidebar data={data} />
           </div>

@@ -12,3 +12,13 @@ body, html{
     height: 100%;
     width: 100%;
 }
+
+#cont{
+    flex-direction: row;
+}
+
+@media only screen and (max-width: 800px) {
+    #cont {
+      flex-direction: column;
+    }
+  }
