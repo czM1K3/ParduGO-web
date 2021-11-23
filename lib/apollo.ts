@@ -14,17 +14,11 @@ export type ResolverContext = {
 };
 
 const createIsomorphLink = (context: ResolverContext = {}) => {
-	if (typeof window === "undefined") {
-		const { SchemaLink } = require("@apollo/client/link/schema");
-		const { schema } = require("./schema");
-		return new SchemaLink({ schema, context });
-	} else {
-		const { HttpLink } = require("@apollo/client");
-		return new HttpLink({
-			uri: "/api/graphql",
-			credentials: "same-origin",
-		});
-	}
+	const { HttpLink } = require("@apollo/client");
+	return new HttpLink({
+		uri: "/api/graphql",
+		credentials: "same-origin",
+	});
 };
 
 const createApolloClient = (context?: ResolverContext) => {

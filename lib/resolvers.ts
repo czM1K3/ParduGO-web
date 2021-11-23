@@ -2,6 +2,7 @@ import { Resolvers } from "../.cache/__types__";
 import { MyContext } from "./types/context";
 import brcypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { PrismaClient } from "@prisma/client";
 
 const { JWT_SECRET } = process.env;
 
@@ -9,10 +10,12 @@ if (!JWT_SECRET) {
 	throw new Error("Please define JWT_SECRET");
 }
 
+export const prisma = new PrismaClient();
+
 const resolvers: Resolvers<MyContext> = {
 	Query: {
-		hello: async (_parent, _args, { prisma }) => "Hello!!!",
-		getAllEvents: async (_parent, _args, { prisma }) => {
+		hello: async (_parent, _args) => "Hello!!!",
+		getAllEvents: async (_parent, _args) => {
 			const events = await prisma.event.findMany({
 				where: {
 					end: {
@@ -28,7 +31,7 @@ const resolvers: Resolvers<MyContext> = {
 				end: `${event.end.getTime()}`,
 			}));
 		},
-		getUserEvents: async (_parent, _args, { prisma, userId }) => {
+		getUserEvents: async (_parent, _args, { userId }) => {
 			if (!userId) throw new Error("User not logged in");
 			const events = await prisma.event.findMany({
 				where: {
@@ -45,7 +48,7 @@ const resolvers: Resolvers<MyContext> = {
 				end: `${event.end.getTime()}`,
 			}));
 		},
-		getEvent: async (_parent, { id }, { prisma }) => {
+		getEvent: async (_parent, { id }) => {
 			const event = await prisma.event.findFirst({
 				where: {
 					id: parseInt(id),
@@ -59,7 +62,7 @@ const resolvers: Resolvers<MyContext> = {
 				end: `${event.end.getTime()}`,
 			};
 		},
-		getFavorites: async (_parent, { id }, { prisma}) => {
+		getFavorites: async (_parent, { id }) => {
 			const numIds = id.map((x) => parseInt(x));
 			const events = await prisma.event.findMany({
 				where: {
@@ -77,7 +80,7 @@ const resolvers: Resolvers<MyContext> = {
 		},
 	},
 	Mutation: {
-		login: async (_parent, { email, password }, { prisma }) => {
+		login: async (_parent, { email, password }) => {
 			const user = await prisma.user.findFirst({
 				where: {
 					email,
@@ -88,7 +91,7 @@ const resolvers: Resolvers<MyContext> = {
 			const token = jwt.sign({ userId: user.id }, JWT_SECRET);
 			return `Bearer ${token}`;
 		},
-		register: async (_parent, { email, password }, { prisma }) => {
+		register: async (_parent, { email, password }) => {
 			const user = await prisma.user.findFirst({
 				where: {
 					email,
@@ -105,7 +108,7 @@ const resolvers: Resolvers<MyContext> = {
 			const token = jwt.sign({ userId: newUser.id }, JWT_SECRET); 
 			return `Bearer ${token}`;
 		},
-		createEvent: async (_parent, { input }, { prisma, userId }) => {
+		createEvent: async (_parent, { input }, { userId }) => {
 			if (!userId) throw new Error("Not authenticated");
 			const start = parseInt(input.startTime);
 			const end = parseInt(input.endTime);
@@ -128,7 +131,7 @@ const resolvers: Resolvers<MyContext> = {
 			});
 			return true;
 		},
-		approveEvent: async (_parent, { id }, { prisma, userId }) => {
+		approveEvent: async (_parent, { id }, { userId }) => {
 			if (!userId) throw new Error("User not logged in");
 			const user = await prisma.user.findFirst({
 				where: {
