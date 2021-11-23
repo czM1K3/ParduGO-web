@@ -8,29 +8,19 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 type AkceProps = {
-	id?: number;
+	id: number;
 };
 
-const Akce: React.FC<AkceProps> = ({ id }) => {
-	if (id) return (
-		<Layout>
-			<EventDetail id={id} />
-		</Layout>
-	);
-
-	return (
-		<Layout>
-			<h1>Chyba</h1>
-		</Layout>
-	);
-}
+const Akce: React.FC<AkceProps> = ({ id }) => (
+	<Layout>
+		<EventDetail id={id} />
+	</Layout>
+);
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const id = parseInt(query.id as string);
 	if (!id) return {
-		props: {
-			id: null,
-		}
+		notFound: true,
 	}
 	await client.query({
 		query: EventDocument,
@@ -38,9 +28,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 			id: `${id}`,
 		},
 	})
+
+	const extracted = client.cache.extract();
+	const data = extracted.ROOT_QUERY?.[`getEvent({"id":"${id}"})`];
+	if (!data) return {
+		notFound: true,
+	}
 	return {
 		props: {
-			initialApolloState: client.cache.extract(),
+			initialApolloState: extracted,
 			id,
 		},
 	}
