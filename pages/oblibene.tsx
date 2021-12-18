@@ -10,7 +10,6 @@ const Oblibene: NextPage = () => {
 		<>
 			<Head>
 				<title>Oblíbené</title>
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<Layout>
 				<Favorites id={favorites} />

@@ -9,7 +9,6 @@ const O_Projektu: NextPage = () => {
 		<>
 			<Head>
 				<title>Oblíbené</title>
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<Layout>
 				<Container heading="O projektu">

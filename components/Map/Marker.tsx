@@ -82,14 +82,12 @@ const Marker = ({
 					}}
 					title={name}
 				>
-					<a>
-						<Image
-							src={getMarker(category)}
-							width={60}
-							height={60}
-							alt="Marker on map"
-						/>
-					</a>
+					<Image
+						src={getMarker(category)}
+						width={60}
+						height={60}
+						alt="Marker on map"
+					/>
 				</div>
 			</div>
 		</MapGLMarker>

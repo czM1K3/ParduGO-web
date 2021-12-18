@@ -17,7 +17,6 @@ const Home: NextPage = () => {
 		<>
 			<Head>
 				<title>ParduGO - žívá mapa pardubic</title>
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<Layout>
 				{loading && <Loading />}
