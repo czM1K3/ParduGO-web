@@ -1,6 +1,12 @@
-import React, { FC, createContext, useState, useContext, useEffect } from "react";
+import React, {
+	FC,
+	createContext,
+	useState,
+	useContext,
+	useEffect,
+} from 'react';
 
-const localStorageName = "favorite";
+const localStorageName = 'favorite';
 
 const FavoriteContext = createContext<any>(null);
 
@@ -22,11 +28,11 @@ export const FavoriteProvider: FC = ({ children }) => {
 	}, [state]);
 
 	return (
-		<FavoriteContext.Provider value={{state, setState}}>
+		<FavoriteContext.Provider value={{ state, setState }}>
 			{children}
 		</FavoriteContext.Provider>
 	);
-}
+};
 
 export const useFavorite = (): [
 	string[],
@@ -34,4 +40,4 @@ export const useFavorite = (): [
 ] => {
 	const context = useContext(FavoriteContext);
 	return [context.state, context.setState];
-}
+};

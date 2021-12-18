@@ -18,30 +18,35 @@ const Akce: React.FC<AkceProps> = ({ id }) => (
 	</Layout>
 );
 
-export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+	req,
+	query,
+}) => {
 	const id = parseInt(query.id as string);
-	if (!id) return {
-		notFound: true,
-	}
-	if (isAlreadyOnSite(req)) return { props: { id, } };
+	if (!id)
+		return {
+			notFound: true,
+		};
+	if (isAlreadyOnSite(req)) return { props: { id } };
 	await client.query({
 		query: EventDocument,
 		variables: {
 			id: `${id}`,
 		},
-	})
+	});
 
 	const extracted = client.cache.extract();
 	const data = extracted.ROOT_QUERY?.[`getEvent({"id":"${id}"})`];
-	if (!data) return {
-		notFound: true,
-	}
+	if (!data)
+		return {
+			notFound: true,
+		};
 	return {
 		props: {
 			initialApolloState: extracted,
 			id,
 		},
-	}
-}
+	};
+};
 
 export default Akce;

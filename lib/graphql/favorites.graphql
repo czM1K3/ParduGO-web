@@ -1,6 +1,6 @@
-query Favorites ($id: [ID!]!) {
+query Favorites($id: [ID!]!) {
 	getFavorites(id: $id) {
-	  id
+		id
 		name
 		latitude
 		longitude

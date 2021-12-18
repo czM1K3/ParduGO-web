@@ -1,12 +1,12 @@
-query getAllEvents{
-  getAllEvents{
-    id
-    name
-    latitude
-    longitude
-    start
-    end
-    category
-    description
-  }
+query getAllEvents {
+	getAllEvents {
+		id
+		name
+		latitude
+		longitude
+		start
+		end
+		category
+		description
+	}
 }

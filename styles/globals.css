@@ -2,23 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html{
-    background-color: #F6F7FA;
-    height: 100%;
-    width: 100%;
+body,
+html {
+	background-color: #f6f7fa;
+	height: 100%;
+	width: 100%;
 }
 
-#__next{
-    height: 100%;
-    width: 100%;
+#__next {
+	height: 100%;
+	width: 100%;
 }
 
-#cont{
-    flex-direction: row;
+#cont {
+	flex-direction: row;
 }
 
 @media only screen and (max-width: 800px) {
-    #cont {
-      flex-direction: column;
-    }
-  }
+	#cont {
+		flex-direction: column;
+	}
+}

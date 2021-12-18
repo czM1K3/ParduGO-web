@@ -1,6 +1,6 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { SchemaLink } from "@apollo/client/link/schema";
-import { schema } from "./schema";
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { SchemaLink } from '@apollo/client/link/schema';
+import { schema } from './schema';
 
 export const client = new ApolloClient({
 	ssrMode: true,

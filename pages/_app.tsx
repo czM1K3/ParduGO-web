@@ -7,14 +7,14 @@ import { useApollo } from 'lib/apollo';
 import { FavoriteProvider } from 'utils/favoriteContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const apolloClient = useApollo(pageProps.initialApolloState);
-  return (
-    <ApolloProvider client={apolloClient}>
-      <FavoriteProvider>
-        <Component {...pageProps} />
-      </FavoriteProvider>
-    </ApolloProvider>
-  );
+	const apolloClient = useApollo(pageProps.initialApolloState);
+	return (
+		<ApolloProvider client={apolloClient}>
+			<FavoriteProvider>
+				<Component {...pageProps} />
+			</FavoriteProvider>
+		</ApolloProvider>
+	);
 }
 
 export default MyApp;

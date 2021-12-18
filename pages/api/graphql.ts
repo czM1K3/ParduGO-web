@@ -1,10 +1,10 @@
-import { ApolloServer } from "apollo-server-micro";
-import { schema } from "../../lib/schema";
-import { myContext as context } from "../../lib/context";
-import Cors from "micro-cors";
+import { ApolloServer } from 'apollo-server-micro';
+import { schema } from '../../lib/schema';
+import { myContext as context } from '../../lib/context';
+import Cors from 'micro-cors';
 
 const cors = Cors({
-	origin: "*",
+	origin: '*',
 });
 
 const apolloServer = new ApolloServer({
@@ -24,11 +24,11 @@ export const config = {
 
 export default cors((req, res) => {
 	if (req.method === 'OPTIONS') {
-	  res.end();
-	  return false;
+		res.end();
+		return false;
 	}
-  
+
 	return apolloServer.createHandler({
-	  path: '/api/graphql',
+		path: '/api/graphql',
 	})(req, res);
-  });
+});

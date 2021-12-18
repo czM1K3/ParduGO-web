@@ -16,84 +16,84 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useEventQuery } from 'lib/graphql/event.graphql';
 
 const Marker = ({
-  id,
-  latitude,
-  longitude,
-  category,
-  description,
-  name,
-  isSomeOpen,
-  setIsSomeOpen,
+	id,
+	latitude,
+	longitude,
+	category,
+	description,
+	name,
+	isSomeOpen,
+	setIsSomeOpen,
 }: {
-  latitude: number;
-  longitude: number;
-  category: string;
-  id: string;
-  description?: string;
-  name?: string;
-  isSomeOpen: boolean;
-  setIsSomeOpen: Dispatch<SetStateAction<boolean>>;
+	latitude: number;
+	longitude: number;
+	category: string;
+	id: string;
+	description?: string;
+	name?: string;
+	isSomeOpen: boolean;
+	setIsSomeOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [hover, setHover] = useState(false);
+	const [hover, setHover] = useState(false);
 
-  const getMarker = (category: string) => {
-    switch (category) {
-      case 'Pomozte nám':
-        return HelpUs;
-      case 'Reklama':
-        return Ad;
-      case 'Koncert':
-        return Concert;
-      case 'Zdraví':
-        return Health;
-      case 'Film':
-        return Film;
-      case 'Politika':
-        return Policy;
-      case 'Sport':
-        return Sport;
-      case 'Divadlo':
-        return Theatre;
-      case 'Hudba':
-        return Sound;
-      case 'Akce':
-        return Event;
-      case 'Reklama':
-        return Ad;
-      default:
-        return Other;
-    }
-  };
+	const getMarker = (category: string) => {
+		switch (category) {
+			case 'Pomozte nám':
+				return HelpUs;
+			case 'Reklama':
+				return Ad;
+			case 'Koncert':
+				return Concert;
+			case 'Zdraví':
+				return Health;
+			case 'Film':
+				return Film;
+			case 'Politika':
+				return Policy;
+			case 'Sport':
+				return Sport;
+			case 'Divadlo':
+				return Theatre;
+			case 'Hudba':
+				return Sound;
+			case 'Akce':
+				return Event;
+			case 'Reklama':
+				return Ad;
+			default:
+				return Other;
+		}
+	};
 
-  const url = `/akce/${id}`;
+	const url = `/akce/${id}`;
 
-  return (
-    <MapGLMarker latitude={latitude} longitude={longitude}>
-      <div className="relative">
-        {hover && (
-          <div className="absolute w-[150px] -translate-x-1/2 top-[-6rem] bg-white text-center rounded">
-            {name}
-          </div>
-        )}
-        <div
-          className="-translate-y-1/2 -translate-x-1/2 cursor-pointer"
-          onClick={() => {
-            setHover(!hover);
-          }}
-          title={name}
-        >
-          <a>
-            <Image
-              src={getMarker(category)}
-              width={60}
-              height={60}
-              alt="Marker on map"
-            />
-          </a>
-        </div>
-      </div>
-    </MapGLMarker>
-  );
+	return (
+		<MapGLMarker latitude={latitude} longitude={longitude}>
+			<div className="relative">
+				{hover && (
+					<div className="absolute w-[150px] -translate-x-1/2 top-[-6rem] bg-white text-center rounded">
+						{name}
+					</div>
+				)}
+				<div
+					className="-translate-y-1/2 -translate-x-1/2 cursor-pointer"
+					onClick={() => {
+						setHover(!hover);
+					}}
+					title={name}
+				>
+					<a>
+						<Image
+							src={getMarker(category)}
+							width={60}
+							height={60}
+							alt="Marker on map"
+						/>
+					</a>
+				</div>
+			</div>
+		</MapGLMarker>
+	);
 };
 
 export default Marker;

@@ -1,16 +1,16 @@
 query Event($id: ID!) {
-  getEvent(id: $id) {
-    name
-    latitude
-    longitude
-    start
-    end
-    category
-    web
-    contact_phone
-    contact_email
-    description
-    approved
-    price
-  }
+	getEvent(id: $id) {
+		name
+		latitude
+		longitude
+		start
+		end
+		category
+		web
+		contact_phone
+		contact_email
+		description
+		approved
+		price
+	}
 }

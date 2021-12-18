@@ -4,17 +4,17 @@ import Head from 'next/head';
 import { Register } from '@components/Register';
 
 const Prihlaseni: NextPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Registrace</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <Layout>
-        <Register />
-      </Layout>
-    </>
-  );
+	return (
+		<>
+			<Head>
+				<title>Registrace</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
+			<Layout>
+				<Register />
+			</Layout>
+		</>
+	);
 };
 
 export default Prihlaseni;
