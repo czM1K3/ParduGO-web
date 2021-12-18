@@ -6,6 +6,7 @@ import { GetAllEventsDocument, useGetAllEventsQuery } from '../lib/graphql/index
 import { Loading } from '@components/Loading';
 import Head from 'next/head';
 import { client } from "../lib/apollo-server";
+import { isAlreadyOnSite } from 'lib/already-on-site';
 
 const Home: NextPage = () => {
   const { data, error, loading } = useGetAllEventsQuery();
@@ -29,7 +30,8 @@ const Home: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  if (isAlreadyOnSite(req)) return { props: {} };
   await client.query({
     query: GetAllEventsDocument,
   });

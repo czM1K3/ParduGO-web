@@ -1,6 +1,7 @@
 import { EventDetail } from '@components/EventDetail';
 import { Layout } from '@components/Layout';
 import { Loading } from '@components/Loading';
+import { isAlreadyOnSite } from 'lib/already-on-site';
 import { client } from 'lib/apollo-server';
 import { EventDocument } from 'lib/graphql/event.graphql';
 import { GetServerSideProps } from 'next';
@@ -17,11 +18,12 @@ const Akce: React.FC<AkceProps> = ({ id }) => (
 	</Layout>
 );
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
 	const id = parseInt(query.id as string);
 	if (!id) return {
 		notFound: true,
 	}
+	if (isAlreadyOnSite(req)) return { props: { id, } };
 	await client.query({
 		query: EventDocument,
 		variables: {
