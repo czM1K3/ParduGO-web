@@ -1,7 +1,6 @@
 import { EventDetail } from '@components/EventDetail';
 import { Layout } from '@components/Layout';
 import { Loading } from '@components/Loading';
-import { isAlreadyOnSite } from 'lib/already-on-site';
 import { client } from 'lib/apollo-server';
 import { EventDocument } from 'lib/graphql/event.graphql';
 import { GetServerSideProps } from 'next';
@@ -27,7 +26,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 		return {
 			notFound: true,
 		};
-	if (isAlreadyOnSite(req)) return { props: { id } };
 	await client.query({
 		query: EventDocument,
 		variables: {
