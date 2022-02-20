@@ -1,6 +1,6 @@
 import { Layout } from '@components/Layout';
 import { Sidebar } from '@components/Sidebar';
-import type { GetServerSideProps, NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { Map } from '@components/Map';
 import {
 	GetAllEventsDocument,
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	await client.query({
 		query: GetAllEventsDocument,
 	});

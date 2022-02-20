@@ -132,7 +132,7 @@ const resolvers: Resolvers<MyContext> = {
 			});
 			return true;
 		},
-		approveEvent: async (_parent, { id }, { userId }) => {
+		approveEvent: async (_parent, { id }, { userId, revalidate }) => {
 			if (!userId) throw new Error('User not logged in');
 			const user = await prisma.user.findFirst({
 				where: {
@@ -149,6 +149,8 @@ const resolvers: Resolvers<MyContext> = {
 					approved: true,
 				},
 			});
+			revalidate(`/akce/${id}`);
+			revalidate('/');
 			return true;
 		},
 	},

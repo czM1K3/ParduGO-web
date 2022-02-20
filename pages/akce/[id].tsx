@@ -1,27 +1,35 @@
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import React from 'react';
 import { EventDetail } from '@components/EventDetail';
 import { Layout } from '@components/Layout';
-import { Loading } from '@components/Loading';
 import { client } from 'lib/apollo-server';
 import { EventDocument } from 'lib/graphql/event.graphql';
-import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { prisma } from 'lib/resolvers';
 
 type AkceProps = {
 	id: number;
 };
 
-const Akce: React.FC<AkceProps> = ({ id }) => (
+const Akce: NextPage<AkceProps> = ({ id }) => (
 	<Layout>
 		<EventDetail id={id} />
 	</Layout>
 );
 
-export const getServerSideProps: GetServerSideProps = async ({
-	req,
-	query,
+export const getStaticPaths: GetStaticPaths = async () => {
+	const events = await prisma.event.findMany();
+	return {
+		fallback: "blocking",
+		paths: events.map((event) => `/akce/${event.id}`),
+	};
+};
+
+export const getStaticProps: GetStaticProps<AkceProps> = async ({
+	params,
 }) => {
-	const id = parseInt(query.id as string);
+	if (!params || !params.id || typeof params.id !== 'string') 
+		return { notFound: true };
+	const id = parseInt(params.id);
 	if (!id)
 		return {
 			notFound: true,

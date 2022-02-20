@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export const middleware = (req: NextRequest) => {
 	const authorization = req.cookies['authorization'];
 	if (!authorization) {
-		return NextResponse.redirect('/prihlaseni');
+		const url = req.nextUrl.clone();
+		url.pathname = '/prihlaseni';
+		return NextResponse.redirect(url);
 	}
 };
