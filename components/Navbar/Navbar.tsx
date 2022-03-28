@@ -24,18 +24,7 @@ const Navbar: React.FC = () => {
 						/>
 					</Link>
 				</NavbarSection>
-
-				<NavbarSection>
-					<div className="flex justify-center align-center mt-4 w-3/4">
-						<input
-							type="text"
-							name="searchbar"
-							className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-pardubice-default focus:border-transparent"
-							placeholder="vyhledat místo"
-						/>
-					</div>
-				</NavbarSection>
-
+				
 				<NavbarSection>
 					<div className="space-x-4">
 						<NavbarItem url="/" name="Mapa" />
