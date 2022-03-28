@@ -24,12 +24,12 @@ const Navbar: React.FC = () => {
 						/>
 					</Link>
 				</NavbarSection>
-				
+
 				<NavbarSection>
 					<div className="space-x-4">
 						<NavbarItem url="/" name="Mapa" />
 						<NavbarItem url="/oblibene" name="Oblíbené" />
-						<NavbarItem url="/o-projektu" name="O projektu" />
+						<NavbarItem url="/o-projektu" name="O&nbsp;projektu" />
 						<NavbarItem
 							url={isAuthenticated ? '/administrace' : '/prihlaseni'}
 							name={isAuthenticated ? 'Admin' : 'Přihlášení'}
