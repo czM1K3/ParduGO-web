@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
 							name={isAuthenticated ? 'Admin' : 'Přihlášení'}
 						/>
 						{isAuthenticated && (
-							<Link href="/administrace/odhlasit">Odhlásit se</Link>
+							<Link href="/administrace/odhlasit">Odhlásit&nbsp;se</Link>
 						)}
 					</div>
 				</NavbarSection>
